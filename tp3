@@ -9,7 +9,7 @@ element *creerListe() {
 }
 element *chargerListe(int *Tab, int taille) {
     element *tete = NULL;
-    element *courant = NULL;
+    element *ptr = NULL;
     for (int i = 0; i < taille; i++) {
         element *nouveau = (element *)malloc(sizeof(element));
         nouveau->val = Tab[i];
@@ -17,20 +17,20 @@ element *chargerListe(int *Tab, int taille) {
         if (tete == NULL) { 
             tete = nouveau;
         } else {
-            courant->suivant = nouveau;
+            ptr->suivant = nouveau;
         }
-        courant = nouveau;
+        ptr= nouveau;
     }
     return tete;
 }
 void afficherListe(element *L) {
-    element *courant = L;
-    while (courant != NULL) { 
-        printf("%d", courant->val);
-        if (courant->suivant != NULL) {
+    element *ptr = L;
+    while (ptr!= NULL) { 
+        printf("%d", ptr->val);
+        if (ptr->suivant != NULL) {
             printf("->");
         }
-        courant = courant->suivant;
+        ptr= ptr->suivant;
     }
     printf("->NULL\n");
 }
@@ -42,12 +42,12 @@ element *supprimerEnFin(element *L) {
         free(L);
         return NULL; 
     }
-    element *courant = L; 
-    while (courant->suivant->suivant != NULL) {
-        courant = courant->suivant;
+    element *ptr= L; 
+    while (ptr->suivant->suivant != NULL) {
+        ptr = ptr->suivant;
     }
-    free(courant->suivant); 
-    courant->suivant = NULL; 
+    free(ptr->suivant); 
+    ptr->suivant = NULL; 
     return L; 
 }
 element *ajouterEnDebut(element *L, int val) {
